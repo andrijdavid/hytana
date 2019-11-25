@@ -26,7 +26,7 @@ class PHytana(torch.nn.Module):
     def __init__(self, num_parameters=1, init=(0.303, 0.632)):
         super(PHytana, self).__init__()
         self.num_parameters = num_parameters
-        self.weight = torch.nn.Parameter()
+        self.weight = torch.nn.Parameter(torch.Tensor([init] * self.num_parameters))
         
     def hytana(self, x, alpha, beta):
         return x/2 *(torch.tanh(alpha + beta * x))
@@ -34,9 +34,13 @@ class PHytana(torch.nn.Module):
     def forward(self, input):
         b,c,_,_ = input.size()
         if self.num_parameters > 1:
-            assert c == self.num_parameters, 'The number of parameters should equal the number of size'
+            assert c == self.num_parameters, 'The number of parameters should equal the number of channel'
+            inps = torch.unbind(input, 1)
+            output = list()
             for i in range(self.num_parameters):
                 alpha, beta = self.weight[i]
-                input[:][i] = self.hytana(input, alpha, beta)
+                output.append(self.hytana(inps[i], alpha, beta))
+            output = torch.stack(output, 1)
+            return output
         alpha, beta = self.weight
         return self.hytana(input, alpha, beta)
