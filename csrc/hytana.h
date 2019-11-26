@@ -19,7 +19,7 @@ GLOBAL_INLINE scalar_t sech(const scalar_t z) {
 
 template <typename scalar_t>
 GLOBAL_INLINE scalar_t sigmoid(const scalar_t z) {
-   return 1.0 / (1 + exp(-z);
+   return 1.0 / (1 + exp(-z));
 }
 
 template <typename scalar_t>
