@@ -21,7 +21,7 @@ setup(
             EXT_SRCS,
             extra_compile_args={
                 'cxx': [],
-                'nvcc': ['--expt-extended-lambda', '--use_fast_math', '-allow-expensive-optimizations']
+                'nvcc': ['--expt-extended-lambda', '--use_fast_math']
             },
             include_dirs=['external']
         )
