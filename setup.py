@@ -9,7 +9,7 @@ EXT_SRCS = [
 
 setup(
     name='hytana_torch',
-    version='0.0.1a',
+    version='0.0.11',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     include_package_data=True,
