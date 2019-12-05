@@ -22,7 +22,7 @@ matrix:
       language: shell
       before_install:
         - choco install python3 --version 3.6.8 --no-progress -y
-        - choco install cuda --no-progress -y
+        - choco install cuda --no-progress -y --ignore-checksums
         - choco install miniconda3 --no-progress -y
       env:
         - PATH=/c/Python36:/c/Python36/Scripts:$PATH
