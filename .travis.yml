@@ -4,41 +4,22 @@ sudo: required
 
 compiler:
   - gcc
-
+  
+env:
+  - CIBW_BEFORE_BUILD: conda install pytorch cudatoolkit=10.1 -y -c pytorch
+  
 matrix:
   include:
     - sudo: required
       services:
         - docker
       env: 
-      - PIP=pip
-      - CUDA=10.1.105-1
-      - CUDA_SHORT=10.1
       - UBUNTU_VERSION=ubuntu1804
       # build using a different image from the docker registry
       - CIBW_MANYLINUX_X86_64_IMAGE: andrijdavid/hytana-linux
       - CIBW_MANYLINUX_I686_IMAGE: andrijdavid/hytana-linux
+      - CIBW_BUILD: cp3?-*
       dist: bionic
-      before_install:
-        - INSTALLER=cuda-repo-${UBUNTU_VERSION}_${CUDA}_amd64.deb
-        - wget http://developer.download.nvidia.com/compute/cuda/repos/${UBUNTU_VERSION}/x86_64/${INSTALLER}
-        - sudo dpkg -i ${INSTALLER}
-        - wget https://developer.download.nvidia.com/compute/cuda/repos/${UBUNTU_VERSION}/x86_64/7fa2af80.pub
-        - sudo apt-key add 7fa2af80.pub
-        - sudo apt update -qq
-        - sudo apt install -y cuda-core-${CUDA_SHORT/./-} cuda-cudart-dev-${CUDA_SHORT/./-} cuda-cufft-dev-${CUDA_SHORT/./-}
-        - sudo apt clean
-        - CUDA_HOME=/usr/local/cuda-${CUDA_SHORT}
-        - LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
-        - PATH=${CUDA_HOME}/bin:${PATH}
-        - wget https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip
-        - unzip ninja-linux.zip
-        - PATH=${PATH}:${PWD}
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-        - chmod +x miniconda.sh
-        - ./miniconda.sh -b -p ~/local/miniconda
-        - sudo ln -s ~/local/miniconda/bin/activate /activate
-        - /activate
     - os: osx
       language: generic
       before_install:
@@ -47,6 +28,7 @@ matrix:
         - ./miniconda.sh -b -p ~/local/miniconda
         - sudo ln -s ~/local/miniconda/bin/activate /activate
         - /activate
+        - brew update-reset
         - brew tap caskroom/drivers
         - brew cask install nvidia-cuda
         
@@ -54,14 +36,12 @@ matrix:
       language: shell
       before_install:
         - choco install python3 --version 3.6.8 --no-progress -y
-        - choco install cuda --no-progress -y --ignore-checksums
         - choco install miniconda3 --no-progress -y
       env:
         - PATH=/c/Python36:/c/Python36/Scripts:$PATH
  
 
 script:
-  - conda install pytorch cudatoolkit=10.1 -y -c pytorch
   - pip install --upgrade pip
   - pip install cibuildwheel==1.0.0
   - cibuildwheel --output-dir wheelhouse
