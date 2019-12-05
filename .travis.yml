@@ -23,6 +23,7 @@ matrix:
       before_install:
         - choco install python3 --version 3.6.8 --no-progress -y
         - choco install cuda --no-progress -y
+        - choco install miniconda3 --no-progress -y
       env:
         - PATH=/c/Python36:/c/Python36/Scripts:$PATH
  
@@ -46,10 +47,11 @@ before_install:
   - chmod +x miniconda.sh
   - ./miniconda.sh -b -p ~/local/miniconda
   - sudo ln -s ~/local/miniconda/bin/activate /activate
-  - /activate && conda install pytorch cudatoolkit=10.1 -y -c pytorch
   
 
 script:
+  - conda activate
+  - conda install pytorch cudatoolkit=10.1 -y -c pytorch
   - pip install --upgrade pip
   - pip install cibuildwheel==1.0.0
   - cibuildwheel --output-dir wheelhouse
