@@ -18,9 +18,8 @@ matrix:
       env: 
       - UBUNTU_VERSION=ubuntu1804
       # build using a different image from the docker registry
-      - CIBW_MANYLINUX_X86_64_IMAGE: pytorch/manylinux-cuda100
-      - CIBW_MANYLINUX_I686_IMAGE: pytorch/manylinux-cuda100
-
+      - CIBW_MANYLINUX_X86_64_IMAGE: andrijdavid/hytana-linux
+      - CIBW_MANYLINUX_I686_IMAGE: andrijdavid/hytana-linux
       dist: bionic
     - os: osx
       language: generic
