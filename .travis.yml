@@ -47,10 +47,10 @@ before_install:
   - chmod +x miniconda.sh
   - ./miniconda.sh -b -p ~/local/miniconda
   - sudo ln -s ~/local/miniconda/bin/activate /activate
+  - /activate
   
 
 script:
-  - conda activate
   - conda install pytorch cudatoolkit=10.1 -y -c pytorch
   - pip install --upgrade pip
   - pip install cibuildwheel==1.0.0
