@@ -6,7 +6,9 @@ compiler:
   - gcc
   
 env:
-  - CIBW_BEFORE_BUILD: conda install pytorch cudatoolkit=10.1 -y -c pytorch
+  global:
+    - CIBW_BEFORE_BUILD: conda install pytorch cudatoolkit=10.1 -y -c pytorch
+    - CIBW_BUILD: cp3?-*
   
 matrix:
   include:
@@ -16,9 +18,9 @@ matrix:
       env: 
       - UBUNTU_VERSION=ubuntu1804
       # build using a different image from the docker registry
-      - CIBW_MANYLINUX_X86_64_IMAGE: andrijdavid/hytana-linux
-      - CIBW_MANYLINUX_I686_IMAGE: andrijdavid/hytana-linux
-      - CIBW_BUILD: cp3?-*
+      - CIBW_MANYLINUX_X86_64_IMAGE: pytorch/manylinux-cuda100
+      - CIBW_MANYLINUX_I686_IMAGE: pytorch/manylinux-cuda100
+
       dist: bionic
     - os: osx
       language: generic
