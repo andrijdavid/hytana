@@ -18,7 +18,6 @@ matrix:
       dist: bionic
     - os: osx
       language: generic
-      env: PIP=pip2
     - os: windows
       language: shell
       before_install:
@@ -50,5 +49,6 @@ before_install:
   
 
 script:
-  - $PIP install cibuildwheel==1.0.0
+  - pip install --upgrade pip
+  - pip install cibuildwheel==1.0.0
   - cibuildwheel --output-dir wheelhouse
