@@ -1,8 +1,5 @@
 FROM pytorch/manylinux-cuda101
 
-RUN apt-get update  -y \
-  && apt-get install -y git cmake vim make wget gnupg build-essential software-properties-common gdb zip
-
 # Install Miniconda
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
   && chmod +x miniconda.sh \
