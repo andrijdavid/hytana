@@ -1,6 +1,6 @@
 language: python
 
-sudo: enabled
+sudo: required
 
 compiler:
   - gcc
@@ -42,6 +42,12 @@ before_install:
   - wget https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - PATH=${PATH}:${PWD}
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b -p ~/local/miniconda
+  - ln -s ~/local/miniconda/bin/activate /activate
+  - /activate && conda install pytorch cudatoolkit=10.1 -y -c pytorch
+  
 
 script:
   - $PIP install cibuildwheel==1.0.0
