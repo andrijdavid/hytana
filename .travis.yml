@@ -22,6 +22,7 @@ matrix:
       language: shell
       before_install:
         - choco install python3 --version 3.6.8 --no-progress -y
+        - choco install cuda --no-progress -y
       env:
         - PATH=/c/Python36:/c/Python36/Scripts:$PATH
  
@@ -44,7 +45,7 @@ before_install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - chmod +x miniconda.sh
   - ./miniconda.sh -b -p ~/local/miniconda
-  - ln -s ~/local/miniconda/bin/activate /activate
+  - sudo ln -s ~/local/miniconda/bin/activate /activate
   - /activate && conda install pytorch cudatoolkit=10.1 -y -c pytorch
   
 
