@@ -43,11 +43,6 @@ before_install:
   - unzip ninja-linux.zip
   - PATH=${PATH}:${PWD}
 
-before_script:
-    - mkdir build
-    - cd build
-    - cmake .. -GNinja
-
 script:
   - $PIP install cibuildwheel==1.0.0
   - cibuildwheel --output-dir wheelhouse
