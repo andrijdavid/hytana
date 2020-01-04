@@ -37,7 +37,7 @@ FOR %%v IN (%DESIRED_PYTHON%) DO (
     set PYTHON_VERSION_STR=%%v
     set PYTHON_VERSION_STR=!PYTHON_VERSION_STR:.=!
     conda remove -n py!PYTHON_VERSION_STR! --all -y || rmdir %CONDA_HOME%\envs\py!PYTHON_VERSION_STR! /s
-    conda create -n py!PYTHON_VERSION_STR! -y -q numpy=1.11 "mkl>=2019" cffi pyyaml boto3 cmake ninja typing python=%%v
+    conda create -n py!PYTHON_VERSION_STR! -y -q numpy=1.11 "mkl>=2019" cffi pyyaml boto3 cmake ninja typing python=%%v pytorch torchvision cudatoolkit=10.1 -c pytorch
 )
 endlocal
 
@@ -100,7 +100,7 @@ for %%v in (%DESIRED_PYTHON_PREFIX%) do (
         set MAGMA_HOME=%cd%\magma_%CUDA_PREFIX%_%BUILD_TYPE%
         set CUDNN_VERSION=7
     )
-    call %CUDA_PREFIX%.bat
+    call cuda101.bat
     if ERRORLEVEL 1 exit /b 1
     if "%BUILD_PYTHONLESS%" == "" call internal\test.bat
     if ERRORLEVEL 1 exit /b 1
