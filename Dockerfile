@@ -12,7 +12,7 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 # Symlink the Miniconda activation script to /activate
 RUN ln -s ~/local/miniconda/bin/activate /activate
 # Install PyTorch
-RUN . /activate && conda install pytorch -c pytorch
+RUN . /activate && conda install pytorch cudatoolkit=10.1 -c pytorch
 
 # Download LibTorch
 #RUN wget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip
