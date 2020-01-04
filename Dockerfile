@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu16.04
 
 RUN apt-get update  -y \
   && apt-get install -y git cmake vim make wget gnupg build-essential software-properties-common gdb zip
