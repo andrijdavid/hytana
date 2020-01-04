@@ -3,7 +3,7 @@
 :: This script parses args, installs required libraries (miniconda, MKL,
 :: Magma), and then delegates to cpu.bat, cuda80.bat, etc.
 
-set CUDA_VERSION=10.1
+set CUDA_VERSION=101
 
 
 if not "%CUDA_VERSION%" == "cpu" (
@@ -312,3 +312,5 @@ taskkill /im ninja.exe /f
 taskkill /im link.exe /f
 taskkill /im cmake.exe /f
 taskkill /im conda-build.exe /f
+
+python setup.py build

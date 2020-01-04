@@ -15,4 +15,6 @@ jobs:
   steps:
       - script: 'call azure/build.bat'
         displayName: Build
+      - publish: $(System.DefaultWorkingDirectory)/build
+        artifact: HytanaWindows
           
