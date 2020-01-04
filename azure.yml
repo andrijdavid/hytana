@@ -13,6 +13,6 @@ jobs:
   pool: 
     vmImage: 'windows-2019'
   steps:
-      - script: 'call azure/internal/build.bat'
+      - script: 'call azure/build.bat'
         displayName: Build
           
