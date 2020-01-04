@@ -3,27 +3,8 @@
 :: This script parses args, installs required libraries (miniconda, MKL,
 :: Magma), and then delegates to cpu.bat, cuda80.bat, etc.
 
-if not "%CUDA_VERSION%" == "" if not "%PYTORCH_BUILD_VERSION%" == "" if not "%PYTORCH_BUILD_NUMBER%" == "" goto env_end
-if "%~1"=="" goto arg_error
-if "%~2"=="" goto arg_error
-if "%~3"=="" goto arg_error
-if not "%~4"=="" goto arg_error
-goto arg_end
+set CUDA_VERSION=10.1
 
-:arg_error
-
-echo Illegal number of parameters. Pass cuda version, pytorch version, build number
-echo CUDA version should be Mm with no dot, e.g. '80'
-echo DESIRED_PYTHON should be M.m, e.g. '2.7'
-exit /b 1
-
-:arg_end
-
-set CUDA_VERSION=%~1
-set PYTORCH_BUILD_VERSION=%~2
-set PYTORCH_BUILD_NUMBER=%~3
-
-:env_end
 
 if not "%CUDA_VERSION%" == "cpu" (
     set CUDA_PREFIX=cuda%CUDA_VERSION%
