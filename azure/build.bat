@@ -26,7 +26,7 @@ set "miniconda_exe=%CD%\miniconda.exe"
 rmdir /s /q conda
 del miniconda.exe
 curl -k https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe -o "%miniconda_exe%"
-call ..\conda\install_conda.bat
+start /wait "" "%miniconda_exe%" /S /InstallationType=JustMe /RegisterPython=0 /AddToPath=0 /D=%tmp_conda%
 if ERRORLEVEL 1 exit /b 1
 set "ORIG_PATH=%PATH%"
 set "PATH=%CONDA_HOME%;%CONDA_HOME%\scripts;%CONDA_HOME%\Library\bin;%PATH%"
