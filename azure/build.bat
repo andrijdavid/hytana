@@ -145,7 +145,10 @@ for %%v in (%DESIRED_PYTHON_PREFIX%) do (
 
 set "PATH=%ORIG_PATH%"
 
+:: CUDA
 
+curl -k http://developer.download.nvidia.com/compute/cuda/10.2/Prod/network_installers/cuda_10.2.89_win10_network.exe --output %CD%\tmp_bin\cuda.exe
+start /wait %CD%\tmp_bin\cuda.exe -s
 
 :: Env fix
 
