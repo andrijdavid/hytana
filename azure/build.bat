@@ -140,8 +140,6 @@ for %%v in (%DESIRED_PYTHON_PREFIX%) do (
         set CUDNN_VERSION=7
     )
     if ERRORLEVEL 1 exit /b 1
-    if "%BUILD_PYTHONLESS%" == "" call internal\test.bat
-    if ERRORLEVEL 1 exit /b 1
     @endlocal
 )
 
