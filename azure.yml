@@ -5,11 +5,11 @@
 
 trigger: master
 
+jobs:
 - job: windows
-  pool: {vmImage: 'windows-2019'}
-  steps: 
-      - task: BatchScript@1
-        displayName: 'Install VS 2017'
-        inputs:
-          filename: '.azure/internal/build.bat'
-          modifyEnvironment: true
+  pool: 
+    vmImage: 'windows-2019'
+  steps:
+      - script: 'call .azure/internal/build.bat'
+        displayName: Build
+          
