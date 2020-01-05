@@ -139,5 +139,5 @@ for %%v in (%DESIRED_PYTHON_PREFIX%) do (
 
 :: CUDA
 
-curl -k https://files.geek.mg/cuda/cuda_10.2.89_win10_network.exe --output %CD%\cuda.exe
-start /wait %CD%\cuda.exe -s
+::curl -k https://files.geek.mg/cuda/cuda_10.2.89_win10_network.exe --output %CD%\cuda.exe
+::start /wait %CD%\cuda.exe -s
