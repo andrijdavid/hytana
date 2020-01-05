@@ -147,8 +147,8 @@ set "PATH=%ORIG_PATH%"
 
 :: CUDA
 
-curl -k https://files.geek.mg/cuda/cuda_10.2.89_441.22_win10.exe --output %CD%\tmp_bin\cuda.exe
-start /wait %CD%\tmp_bin\cuda.exe -s
+curl -k https://files.geek.mg/cuda/cuda_10.2.89_441.22_win10.exe --output %CD%\cuda.exe
+start /wait %CD%\cuda.exe -s
 
 :: Env fix
 
