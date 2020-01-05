@@ -12,7 +12,7 @@ if not "%CUDA_VERSION%" == "cpu" (
     set CUDA_PREFIX=cpu
 )
 
-if "%DESIRED_PYTHON%" == "" set DESIRED_PYTHON=3.5;3.6;3.7
+if "%DESIRED_PYTHON%" == "" set DESIRED_PYTHON=3.6;3.7
 set DESIRED_PYTHON_PREFIX=%DESIRED_PYTHON:.=%
 set DESIRED_PYTHON_PREFIX=py%DESIRED_PYTHON_PREFIX:;=;py%
 
@@ -184,10 +184,6 @@ for /f "usebackq tokens=*" %%i in (`where link.exe`) do move "%%i" "%%i.bak"
 
 endlocal
 
-taskkill /im nvcc.exe /f
-taskkill /im sccache.exe /f
-taskkill /im cl.exe /f
-taskkill /im ninja.exe /f
-taskkill /im link.exe /f
-taskkill /im cmake.exe /f
-taskkill /im conda-build.exe /f
+dir
+conda activate py3.7
+python3 setup.py build
