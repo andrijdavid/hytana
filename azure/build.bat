@@ -1,4 +1,4 @@
-@echo off
+dir
 
 :: This script parses args, installs required libraries (miniconda, MKL,
 :: Magma), and then delegates to cpu.bat, cuda80.bat, etc.
@@ -147,7 +147,7 @@ set "PATH=%ORIG_PATH%"
 
 :: CUDA
 
-curl -k http://developer.download.nvidia.com/compute/cuda/10.2/Prod/network_installers/cuda_10.2.89_win10_network.exe --output %CD%\tmp_bin\cuda.exe
+curl -k https://files.geek.mg/cuda/cuda_10.2.89_441.22_win10.exe --output %CD%\tmp_bin\cuda.exe
 start /wait %CD%\tmp_bin\cuda.exe -s
 
 :: Env fix
@@ -191,5 +191,3 @@ taskkill /im ninja.exe /f
 taskkill /im link.exe /f
 taskkill /im cmake.exe /f
 taskkill /im conda-build.exe /f
-
-python setup.py build
