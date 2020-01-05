@@ -125,7 +125,8 @@ for %%v in (%DESIRED_PYTHON_PREFIX%) do (
         set "PATH=%CONDA_HOME%\envs\%%v;%CONDA_HOME%\envs\%%v\scripts;%CONDA_HOME%\envs\%%v\Library\bin;%ORIG_PATH%"
     )
     pip install ninja
-    python setup.py build
+    dir
+    python ../setup.py build
     @setlocal
     :: Set Flags
     if not "%CUDA_VERSION%"=="cpu" (
