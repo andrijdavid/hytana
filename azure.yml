@@ -13,6 +13,8 @@ jobs:
   pool: 
     vmImage: 'windows-2019'
   steps:
+      - script: 'call azure/deps.bat'
+        displayName: InstallDeps
       - script: 'call azure/build.bat'
         displayName: Build
       - publish: $(System.DefaultWorkingDirectory)/build
