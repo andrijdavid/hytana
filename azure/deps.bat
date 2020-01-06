@@ -126,7 +126,9 @@ for %%v in (%DESIRED_PYTHON_PREFIX%) do (
     )
     pip install ninja
     dir
+    choco install cuda    
     python ../setup.py build
+    python ../setup.py bdist_wheel
     @setlocal
     :: Set Flags
     if not "%CUDA_VERSION%"=="cpu" (
