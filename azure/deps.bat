@@ -126,7 +126,7 @@ for %%v in (%DESIRED_PYTHON_PREFIX%) do (
     )
     pip install ninja
     dir
-    choco install -y cuda   
+    choco install  --timeout 0 -y cuda   
     set CUDA_VERSION_STR=101
     set "PATH=%ProgramFiles%\NVIDIA GPU Computing Toolkit\CUDA\v%CUDA_VERSION_STR%\bin;%ProgramFiles%\NVIDIA GPU Computing Toolkit\CUDA\v%CUDA_VERSION_STR%\libnvvp;%PATH%"
     set "CUDA_PATH=%ProgramFiles%\NVIDIA GPU Computing Toolkit\CUDA\v%CUDA_VERSION_STR%"
