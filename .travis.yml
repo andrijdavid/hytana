@@ -1,0 +1,48 @@
+language: python
+
+sudo: required
+
+compiler:
+  - gcc
+  
+env:
+  global:
+    - CIBW_BEFORE_BUILD: conda install pytorch cudatoolkit=10.1 -y -c pytorch
+    - CIBW_BUILD: cp3?-*
+  
+matrix:
+  include:
+    - sudo: required
+      services:
+        - docker
+      env: 
+      - UBUNTU_VERSION=ubuntu1804
+      # build using a different image from the docker registry
+      - CIBW_MANYLINUX_X86_64_IMAGE: andrijdavid/hytana-linux
+      - CIBW_MANYLINUX_I686_IMAGE: andrijdavid/hytana-linux
+      dist: bionic
+    - os: osx
+      language: generic
+      before_install:
+        - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+        - chmod +x miniconda.sh
+        - ./miniconda.sh -b -p ~/local/miniconda
+        - sudo ln -s ~/local/miniconda/bin/activate /activate
+        - /activate
+        - brew update-reset
+        - brew tap caskroom/drivers
+        - brew cask install nvidia-cuda
+        
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python3 --version 3.6.8 --no-progress -y
+        - choco install miniconda3 --no-progress -y
+      env:
+        - PATH=/c/Python36:/c/Python36/Scripts:$PATH
+ 
+
+script:
+  - pip install --upgrade pip
+  - pip install cibuildwheel==1.0.0
+  - cibuildwheel --output-dir wheelhouse

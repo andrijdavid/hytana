@@ -54,5 +54,5 @@ class PHytana(torch.nn.Module):
                 output.append(self.hytana(inps[i], alpha, beta))
             output = torch.stack(output, 1)
             return output
-        alpha, beta = self.weight
+        alpha, beta = self.weight[0]
         return self.hytana(input, alpha, beta)
