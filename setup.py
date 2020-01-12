@@ -29,7 +29,7 @@ else:
 
 setup(
     name='hytana_torch',
-    version='0.0.1a',
+    version='0.0.1b',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     include_package_data=True,
