@@ -84,13 +84,3 @@ def test_gradient():
     from hytana_torch import HytanaFunction
     inp = torch.randn(10, 10, dtype=torch.float64, requires_grad=True, device='cuda:0')
     assert torch.autograd.gradcheck(HytanaFunction.apply, inp)
-
-def test_overlapping():
-    '''Test handling of overlapping output tensors'''
-    from hytana_torch import hytana_forward
-    t = torch.randn(2, 10, device='cuda:0')
-    t_o = t.as_strided((3,10), (5,1)) # Overlapping
-    t_c = t_o.contiguous()             # Contiguous
-    o_o = hytana_forward(t_o, torch.empty_like(t_o))
-    o_c = hytana_forward(t_c, torch.empty_like(t_c))
-    assert torch.equal(o_o, o_c)
